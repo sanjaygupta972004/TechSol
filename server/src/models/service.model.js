@@ -1,24 +1,23 @@
-import { Schema, Mongoose} from "mongoose";
-
+import mongoose ,{Schema} from "mongoose";
 const serviceSchema = new Schema({
 service:{
-   typeof: String,
+   type: String,
    required: true
 },
 description:{
-   typeof : String,
+   type : String,
    required: true
 },
 price:{
-   typeof: Number,
+   type: String,
    required: true
 },
 provider:{
-   typeof: String,
+   type: String,
    required: true 
 }
 }
 ,{timestamps: true}
 );
 
-export const Service = Mongoose.model("Service", serviceSchema);
+export const Service = mongoose.model("Service", serviceSchema);
