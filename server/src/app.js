@@ -43,9 +43,11 @@ app.use(cookieParser())
 import userRouter from "./routers/user.router.js"
 import contactRouter from "./routers/contact.router.js"
 import serviceRouter from "./routers/service.router.js"
+import adminRouter from "./routers/admin.router.js"
 
 app.use("/api/v/users",userRouter)
 app.use("/api/v/contacts",contactRouter)
 app.use("/api/v/services",serviceRouter)
+app.use("/api/v/admin",adminRouter)
 
  export {app}
