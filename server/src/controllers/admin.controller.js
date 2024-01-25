@@ -3,6 +3,7 @@ import {User} from '../models/user.model.js';
 import {Contact } from '../models/contact.model.js';
 import {asyncHandler} from '../utils/asyncHandler.js';
 import {ApiResponse} from '../utils/ApiResponse.js';
+import mongoose, { Mongoose, isValidObjectId } from 'mongoose';
 
 const getUsers  = asyncHandler(async(req,res,next)=>{
 
@@ -30,42 +31,64 @@ const getContacts  = asyncHandler(async(req,res)=>{
 })
 
 
-const deleteUser = asyncHandler(async(req,res)=>{
+const deleteUser = asyncHandler(async(req,res)=> {
    const {_id} = req.params;
+    const id = new mongoose.Types.ObjectId(_id);
+  
+   const user  =  await User.findById(id);
 
-   if(req.user?._id !== _id){
-      throw new ApiError(401, 'Unauthorized User');
-   }
-
-   const user = await User.findById(_id);
    if(!user){
       throw new ApiError(404, 'User not found');
    }
-   
+
+
+   if(req.user?._id.toString() !== user._id.toString()){
+      throw new ApiError(401, 'You are not authorized to delete this user');
+   }
+
+
    if(user.isAdmin){
       throw new ApiError(400, 'Admin cannot be deleted');
    }
 
-   await user.remove();
+   await user.deleteOne();
    
    return res 
    .status(200)
    .json(new ApiResponse(200, {}, 'User deleted successfully'));
 })
 
+
+
 const updateUser = asyncHandler(async(req,res)=> {
-  const {fullName, email, phoneNumber, isAdmin} = req.body;
+  const {fullName, email, phoneNumber} = req.body;
    const {_id} = req.params;
-   if(req.user?._id !== _id){
-      throw new ApiError(401, 'Unauthorized User');
+   
+   if(!isValidObjectId(_id)){
+      throw new ApiError(400, 'Invalid id');
    }
 
-   const  updatedUser = User.findByIdAndUpdate(_id, 
+   if(!fullName || !email || !phoneNumber){
+      throw new ApiError(400, 'All fields are required');
+   }
+
+   const user =  await User.findById(_id);
+
+   if(!user){
+      throw new ApiError(404, 'User not found');
+   }
+
+   if(req.user?._id.toString() !== user._id.toString()){
+      throw new ApiError(401, 'You are not authorized to update this user');
+   }
+  
+
+   const  updatedUser =  await User.findByIdAndUpdate(_id, 
       {
       fullName,
       email,
       phoneNumber,
-      isAdmin
+
    },
     {new: true}
     ).select('-password -refreshToken');
@@ -81,28 +104,45 @@ const updateUser = asyncHandler(async(req,res)=> {
 
 })
 
+
 const getUser = asyncHandler(async(req,res)=> {
    const {_id} = req.params;
-   const user = await User.findById(_id).select('-password -refreshToken');
-   if(!user){
-      throw new ApiError(404, 'User not found');
-   }
 
-   return res
-   .status(200)
-   .json(new ApiResponse(200, user, 'User fetched successfully'));
-})
+       if(!isValidObjectId(_id)){
+         throw new ApiError(400, 'Invalid id');
+       }
+
+      const user = await User.findById(_id).select('-password -refreshToken');
+      if(!user){
+         throw new ApiError(404, 'User not found');
+      }
+
+      return res
+      .status(200)
+      .json(new ApiResponse(200, user, 'User fetched successfully'));
+   });
 
 
 const deleteContact = asyncHandler(async(req,res)=> {
    const {_id} = req.params;
 
-   const contact = await Contact.findById(_id);
+   if(!isValidObjectId(_id)){
+      throw new ApiError(400, 'Invalid id');
+   }
+  
+    const contact  = await User.findById(_id);
+
    if(!contact){
       throw new ApiError(404, 'Contact not found');
-   }  
+   
+   }
 
-   await contact.remove();
+    if(req.user?._id.toString() !== contact._id.toString()){
+      throw new ApiError(401, 'You are not authorized to delete this contact');
+    }
+
+   await contact.deleteOne();
+
 
    return res
    .status(200)
@@ -112,8 +152,8 @@ const deleteContact = asyncHandler(async(req,res)=> {
 export {
 getUsers,
 getContacts,
-deleteUser,
 updateUser,
 getUser,
+deleteUser,
 deleteContact,
 }
