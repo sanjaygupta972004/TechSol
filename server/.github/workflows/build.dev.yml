@@ -1,0 +1,22 @@
+name: Building Docker Image and deploying to DockerHub
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+    build:
+    runs-on: ubuntu-latest
+
+    steps:
+    -name: Checkout Repository
+     uses: actions/checkout@v2
+
+    - name: Login to DockerHub
+      run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_PASSWORD }}
+
+    - name: Building and Pushing Docker Image to DockerHub
+      run: |
+        docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/server:latest .
+        docker push ${{ secrets.DOCKERHUB_USERNAME }}/server:latest
