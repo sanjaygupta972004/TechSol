@@ -2,7 +2,7 @@ import React from 'react'
 
 import { NavLink } from "react-router-dom";
 import  Analytics  from "../components/Analytics";
-import { home} from '../images/image';
+
 
 export const About = () => {
   return (
