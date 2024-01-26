@@ -7,3 +7,5 @@ export const home2 = "https://media.istockphoto.com/id/1144647692/photo/corporat
 export const contactImage = "https://img.freepik.com/free-vector/customer-support-flat-illustration_23-2148889375.jpg?size=626&ext=jpg&ga=GA1.1.795404094.1703621838&semt=ais"
 
 export const logo2 = "https://designshack.net/wp-content/uploads/immutable.gif"
+
+export const serviceImg = "https://media.istockphoto.com/id/1454928178/photo/customer-choose-emoji-emoticons-happy-mood-on-emotions-satisfaction-meter-evaluation-increase.jpg?s=612x612&w=0&k=20&c=6KFnbxyty_5scrYTdQD1-WfqRBsSmfENYTtf4t8BwHs="

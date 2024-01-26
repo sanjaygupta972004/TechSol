@@ -1,4 +1,5 @@
 import { createContext,useContext, useEffect } from "react";
+import axios from "axios";
 
 import { useState } from "react";
 
@@ -21,47 +22,44 @@ export const AuthProvider = ({children}) => {
       return localStorage.setItem("refreshToken", tokenServer)
    }
 
-   //console.log("accessToken",accessToken);
+   console.log("accessToken",accessToken);
 
    const findUserProfile = async(accessToken) => {
       try {
-         const response = await fetch("http://localhost:5050/api/v/users/user-profile",{
-            method :"GET",
-            headers:
-            {
-               "Content-Type":"application/json",
-             Authorization: `Bearer ${accessToken}`,
-            },
+
+         const response = await axios.get('http://localhost:5050/api/v/users/user-profile',{
+            headers:{
+               Authorization: `Bearer ${accessToken}`
+            }
          })
 
-         const userData = await response.json()
-      
-
-         if(response.ok){
-            setUserProfileData(userData.data)
-         }
-
+         setUserProfileData(response.data.data)
+       
+         
       } catch (error) {
-         console.error("Error during get user profile", error.message ); 
-         throw new Error(error.message)
+         console.error("Error during findUserProfile data",error);
+        throw error
+         
       }
    }
-
+      
    useEffect(() => {
        findUserProfile(accessToken)
    },[])
+
+   console.log("userProfileData",userProfileData);
 
 
    const isLoggedIn = accessToken ? true : false
 
   console.log("accessToken",isLoggedIn);
-
+ 
    const logoutUser = () => {
       setAccessToken("")
       setRefreshToken("")
 
-    const accessToken=  localStorage.removeItem("accessToken")
-    const refreshToken=   localStorage.removeItem("refreshToken")
+    const accessToken =    localStorage.removeItem("accessToken")
+    const refreshToken =   localStorage.removeItem("refreshToken")
 
     return {accessToken,refreshToken}
 
