@@ -111,7 +111,7 @@ const getUserProfile = asyncHandler(async(req,res)=>{
      200, 
      req.user,
     'User profile fetched successfully'
-
+    
 ))
 
 });
