@@ -8,6 +8,7 @@ import About from './pages/About'
 import Service from './pages/Service'
 import Contact from './pages/Contact'
 import Logout from './pages/Logout'
+import { Error } from './components/Error'
 
 import Navbar from './components/Navbar'
 
@@ -27,6 +28,9 @@ function App() {
       <Route path="/service" element={<Service />} />
       <Route path="/contact" element={<Contact />} />
       <Route path="/logout" element={<Logout/>} />
+      <Route path="*" element={<Error />} />
+     
+
     </Routes>
   </Router>
 

@@ -8,9 +8,8 @@ const Service = () => {
     const handleNavigate = () => {
       window.location.href = '/'
     }
- 
+    
  const [service, setService] = useState([])
-
 
  const fetchService = async () => {
   try {
@@ -27,7 +26,6 @@ const Service = () => {
   },[])
 
   console.log(service)  
-
 
   return (
     <div className="container mx-auto">
@@ -50,7 +48,6 @@ const Service = () => {
       ))}
     </div>
   </div>
-  
   )
 }
 

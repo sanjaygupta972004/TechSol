@@ -9,3 +9,5 @@ export const contactImage = "https://img.freepik.com/free-vector/customer-suppor
 export const logo2 = "https://designshack.net/wp-content/uploads/immutable.gif"
 
 export const serviceImg = "https://media.istockphoto.com/id/1454928178/photo/customer-choose-emoji-emoticons-happy-mood-on-emotions-satisfaction-meter-evaluation-increase.jpg?s=612x612&w=0&k=20&c=6KFnbxyty_5scrYTdQD1-WfqRBsSmfENYTtf4t8BwHs="
+
+export const serviceImg2 = "https://media.istockphoto.com/id/1454928178/photo/customer-choose-emoji-emoticons-happy-mood-on-emotions-satisfaction-meter-evaluation-increase.jpg?s=612x612&w=0&k=20&c=6KFnbxyty_5scrYTdQD1-WfqRBsSmfENYTtf4t8BwHs="
