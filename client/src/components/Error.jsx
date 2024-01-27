@@ -16,4 +16,10 @@ import { NavLink } from "react-router-dom";
             <NavLink to="/" className="btn btn-primary">return home</NavLink>
             <NavLink to="/contact" className="btn btn-secondary">report problem</NavLink>
           </div>
-        </div>eror;
+        </div>
+      </section>
+    </>
+  );
+};
+
+export default Error;
