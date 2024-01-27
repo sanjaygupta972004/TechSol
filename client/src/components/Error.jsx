@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 
-export const Error = () => {
+ const Error = () => {
   return (
     <>
       <section className="bg-gray-100 py-16">
@@ -21,3 +21,5 @@ export const Error = () => {
     </>
   );
 };
+
+export default Error;

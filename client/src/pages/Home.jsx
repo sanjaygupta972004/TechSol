@@ -1,5 +1,6 @@
 import Analytics from "../components/Analytics";
 import { home, home2 } from "../images/image";
+import Footer from "../components/Footer";
 
 export const Home = () => {
   return (
@@ -31,9 +32,7 @@ export const Home = () => {
             </div>
           </div>
         </section>
-        <Analytics>
-
-        </Analytics>
+        <Analytics/>    
 
         <section className="bg-gray-100 py-8 md:py-16">
           <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -61,6 +60,8 @@ export const Home = () => {
             </div>
           </div>
         </section>
+        <Footer/>
+
       </main>
     </>
   );

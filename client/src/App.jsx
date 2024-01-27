@@ -8,10 +8,13 @@ import About from './pages/About'
 import Service from './pages/Service'
 import Contact from './pages/Contact'
 import Logout from './pages/Logout'
-import { Error } from './components/Error'
-
+import  Error  from './components/Error'
 import Navbar from './components/Navbar'
 
+import AdminLayout from './components/Admin/Admin-layout'
+import AdminUser from './components/Admin/Admin-user'
+import AdminService from './components/Admin/Admin-service'
+import AdminContact from './components/Admin/Admin-contact'
 
 
 function App() {
@@ -29,6 +32,12 @@ function App() {
       <Route path="/contact" element={<Contact />} />
       <Route path="/logout" element={<Logout/>} />
       <Route path="*" element={<Error />} />
+      <Route path='/admin' element = {<AdminLayout/>}>
+        <Route path='user' element={<AdminUser/>} />
+        <Route path='service' element={<AdminService/>} />
+        <Route path='contact' element={<AdminContact/>} />
+
+      </Route>
      
 
     </Routes>
