@@ -12,10 +12,13 @@ jobs:
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v2
+     
+    - name: Current pwd
+      run: |
+        echo "$PWD"
 
     - name: Login to DockerHub and Building/Pushing Docker Image
       run: |
         docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_PASSWORD }}
-        echo "$PWD"
         docker build -t ss /home/sanjay/TechSol/server
         docker push "${{ secrets.DOCKER_USERNAME }}/server:v1"
