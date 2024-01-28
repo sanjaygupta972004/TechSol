@@ -1,22 +1,18 @@
 import AdminNav from "./Admin-nav";
-import UserComponent from "./Admin-user";
-import ServiceComponent from "./Admin-service";
-import ContactComponent from "./Admin-contact";
+import {Outlet} from 'react-router-dom'
+
 
 
 const AdminLayout = () => {
   return (
     <div className="flex h-screen mt-2 gap-2">
-    
+       
       <div className="w-1/4 bg-gray-800 text-white p-1">
+      <h1 className="text-2xl font-bold mb-4 text-center">Admin Dashboard</h1>
         <AdminNav />
       </div>
 
-      <div className="flex-1 p-4">
-        <UserComponent />
-        <ServiceComponent />
-        <ContactComponent />
-      </div>
+      <Outlet/>
     </div>
   );
 };

@@ -10,7 +10,8 @@ export const AuthProvider = ({children}) => {
    const [accessToken, setAccessToken] = useState(localStorage.getItem("accessToken")) || null
    const [refreshToken, setRefreshToken] = useState(localStorage.getItem("refreshToken")) || null
    const [userProfileData, setUserProfileData] = useState("")
-  
+   
+   const authorization = `Bearer ${accessToken}`
 
    const localStoreAccessToken =(tokenServer)=>{
       setAccessToken(tokenServer)
@@ -22,14 +23,14 @@ export const AuthProvider = ({children}) => {
       return localStorage.setItem("refreshToken", tokenServer)
    }
 
-   console.log("accessToken",accessToken);
+
 
    const findUserProfile = async(accessToken) => {
       try {
 
          const response = await axios.get('http://localhost:5050/api/v/users/user-profile',{
             headers:{
-               Authorization: `Bearer ${accessToken}`
+               Authorization:`${authorization}`
             }
          })
 
@@ -47,7 +48,6 @@ export const AuthProvider = ({children}) => {
        findUserProfile(accessToken)
    },[])
 
-   console.log("userProfileData",userProfileData);
 
 
    const isLoggedIn = accessToken ? true : false
@@ -72,6 +72,7 @@ export const AuthProvider = ({children}) => {
        logoutUser,
        isLoggedIn,
        userProfileData,
+       authorization,
        }}>
          {children}
       </AuthContext.Provider>
