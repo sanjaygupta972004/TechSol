@@ -1,4 +1,4 @@
-name: CI/CD Pipeline
+name: Building Docker Image and deploying to DockerHub
 
 on:
   push:
@@ -6,23 +6,17 @@ on:
       - main
 
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
+    - name: Checkout Repository
       uses: actions/checkout@v2
 
-    - name: Set up Docker for server
-      uses: docker/setup-docker@v2
-      with:
-        dockerfile: server/Dockerfile
+    - name: Login to DockerHub
+      run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
 
-    - name: Build and push server Docker image
-      env:
-        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+    - name: Building and Pushing Docker Image to DockerHub
       run: |
-        echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-        docker build -t sanjaygupta09072004/server-image:latest ./server
-        docker push sanjaygupta09072004/server-image:latest
+        docker build -t ${{ secrets.DOCKER_USERNAME }}/server:latest -f server/Dockerfile .
+        docker push ${{ secrets.DOCKER_USERNAME }}/server:latest
