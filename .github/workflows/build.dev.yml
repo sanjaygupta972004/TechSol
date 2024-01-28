@@ -19,5 +19,5 @@ jobs:
     - name: Building and Pushing Docker Image to DockerHub
       run: |
         cd server
-        docker build -t ${{ secrets.DOCKER_USERNAME }}/server:latest . 
+        docker build -t server . 
         docker push ${{ secrets.DOCKER_USERNAME }}/server:latest
