@@ -11,7 +11,6 @@ const AdminLayout = () => {
       <h1 className="text-2xl font-bold mb-4 text-center">Admin Dashboard</h1>
         <AdminNav />
       </div>
-
       <Outlet/>
     </div>
   );

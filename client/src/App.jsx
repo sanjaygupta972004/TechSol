@@ -24,7 +24,7 @@ function App() {
     <Router>
      <Navbar />
     <Routes>
-      <Route path="/" element={<Home />} />
+      <Route path="/" exact element={<Home />} />
       <Route path="/register" element={<Register />} />
       <Route path="/login" element={<Login/>} />
       <Route path="/about" element={<About />} />
@@ -32,7 +32,7 @@ function App() {
       <Route path="/contact" element={<Contact />} />
       <Route path="/logout" element={<Logout/>} />
       <Route path="*" element={<Error />} />
-      <Route path='/admin' element = {<AdminLayout/>}>
+      <Route path='/admin' exact element = {<AdminLayout/>}>
         <Route path='user' element={<AdminUser/>} />
         <Route path='service' element={<AdminService/>} />
         <Route path='contact' element={<AdminContact/>} />

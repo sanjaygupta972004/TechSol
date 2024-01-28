@@ -18,6 +18,7 @@ const Navbar = () => {
                 <li><NavLink to="/about" className="text-white hover:text-gray-900 hover:underline">About</NavLink></li>
                 <li><NavLink to="/service" className="text-white hover:text-gray-900 hover:underline">Service</NavLink></li>
                 <li><NavLink to="/contact" className="text-white hover:text-gray-900 hover:underline">Contact</NavLink></li>
+                <li><NavLink to="/admin" className="text-white hover:text-gray-900 hover:underline">Admin</NavLink></li>
                 {isLoggedIn ?
                  (<NavLink to="/logout" className="text-white hover:text-gray-900 hover:underline">Logout</NavLink>)
                  :
