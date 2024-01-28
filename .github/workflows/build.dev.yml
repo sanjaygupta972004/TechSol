@@ -20,5 +20,6 @@ jobs:
     - name: Login to DockerHub and Building/Pushing Docker Image
       run: |
         docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_PASSWORD }}
+        docker images
         docker build -t ss /home/runner/work/TechSol/TechSol/server
         docker push "${{ secrets.DOCKER_USERNAME }}/server:v1"
