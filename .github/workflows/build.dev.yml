@@ -22,4 +22,5 @@ jobs:
         docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_PASSWORD }}
         docker build -t ss /home/runner/work/TechSol/TechSol/server
         docker images
-        docker push "${{ secrets.DOCKER_USERNAME }}/server:v1"
+        docker tag ss sanjaygupta09072004/ss:latest
+        docker push sanjaygupta09072004/ss:latest
