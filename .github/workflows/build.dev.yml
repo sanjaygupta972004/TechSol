@@ -13,13 +13,10 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v2
 
-    - name: Login to DockerHub
-      run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_PASSWORD }}
-
-    - name: Building and Pushing Docker Image to DockerHub
+    - name: Login to DockerHub and Building/Pushing Docker Image
       run: |
+        docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_PASSWORD }}
         cd server
         echo "$PWD"
-        docker build -t server .
-        docker tag server ${{ secrets.DOCKER_USERNAME }}/server
-        docker push ${{ secrets.DOCKER_USERNAME }}/server:latest
+        docker build -t ${{ secrets.DOCKER_USERNAME }}/server:v1 .
+        docker push ${{ secrets.DOCKER_USERNAME }}/server:v1
