@@ -20,6 +20,6 @@ jobs:
       run: |
         cd server
         echo "$PWD"
-        docker build -t servrr .
+        docker build -t server .
         docker tag server ${{ secrets.DOCKER_USERNAME }}/server
         docker push ${{ secrets.DOCKER_USERNAME }}/server:latest
