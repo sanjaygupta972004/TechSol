@@ -4,38 +4,6 @@ import {ApiResponse} from "../utils/ApiResponse.js";
 import {asyncHandler} from "../utils/asyncHandler.js";
 
 
-const createService = asyncHandler(async function (req, res) {
-   
-   const {service, description, price, provider} = req.body;
-
-   if(!service || !description || !price || !provider){
-      throw new ApiError(400, "Missing required fields");
-   }
-
-   const oldService = await Service.findOne({service});
-
-   if(oldService){
-      throw new ApiError(400, "Service already exists");
-   }
-
-   const newService = await Service.create ({
-      service,
-      description,
-      price,
-      provider
-   });
-
-   if(!newService){
-      throw new ApiError(500, "Error creating service");
-   }
-
-
-   return res
-      .status(201)
-      .json(new ApiResponse(201, newService, "Service created successfully"));
-
-});
-
 
  const getServices = asyncHandler(async function (req, res) {
 
@@ -52,6 +20,6 @@ const createService = asyncHandler(async function (req, res) {
 });
 
 export {
-    createService,
+   
     getServices  
     }
